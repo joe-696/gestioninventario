@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Choices.js CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+        /* Barra lateral */
+        .sidebar {
+            background-color: #1f2d3d;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 30px 20px;
+            width: 220px;
+            transition: all 0.3s;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar h3 {
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-align: center;
+            color: #3498db;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #3498db;
+            transform: translateX(5px);
+        }
+        .sidebar a .bi {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        /* Contenido principal */
+        .content {
+            margin-left: 220px;
+            padding: 30px 20px;
+            transition: all 0.3s;
+        }
+        /* Media Queries para Responsividad */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+                padding: 20px 10px;
+            }
+            /* Mostrar Navbar en dispositivos móviles */
+            .navbar-mobile {
+                display: flex;
+            }
+        }
+        @media (min-width: 769px) {
+            .navbar-mobile {
+                display: none;
+            }
+        }
+        /* Estilo para el formulario */
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s;
+            margin-bottom: 30px;
+        }
+        .form-container:hover {
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        .form-title {
+            margin-bottom: 20px;
+            color: #3498db;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+        .btn-warning {
+            background-color: #f1c40f;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-warning:hover {
+            background-color: #d4ac0d;
+            transform: scale(1.05);
+        }
+        .modal-header {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .table thead th {
+            background-color: #1f2d3d;
+            color: #fff;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        /* Iconos en botones */
+        .btn .bi {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegación para Dispositivos Móviles -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-md-none navbar-mobile">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-shop-window me-2"></i>Zapatillas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile" 
+                    aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavMobile">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-box-seam me-1"></i>Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="agregar-producto.html"><i class="bi bi-plus-circle me-1"></i>Agregar Producto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="ventas.html"><i class="bi bi-cash-coin me-1"></i>Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reportes.html"><i class="bi bi-bar-chart-fill me-1"></i>Reportes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Barra Lateral para Dispositivos Grandes -->
+    <div class="sidebar d-none d-md-block">
+        <h3><i class="bi bi-shop-window me-2"></i>Zapatillas</h3>
+        <a href="index.html"><i class="bi bi-box-seam me-2"></i>Inventario</a>
+        <a href="agregar-producto.html"><i class="bi bi-plus-circle me-2"></i>Agregar Producto</a>
+        <a href="ventas.html" class="active"><i class="bi bi-cash-coin me-2"></i>Ventas</a>
+        <a href="reportes.html"><i class="bi bi-bar-chart-fill me-2"></i>Reportes</a>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="content">
+        <div class="container-fluid">
+            <!-- Formulario para registrar una venta -->
+            <div class="form-container">
+                <h2 class="form-title"><i class="bi bi-cash-coin me-2"></i>Registrar Venta</h2>
+                <form id="salesForm">
+                    <div class="mb-3">
+                        <label for="productSelect" class="form-label"><i class="bi bi-box-seam me-1"></i>Producto <span class="text-danger">*</span></label>
+                        <select id="productSelect" class="form-select" required>
+                            <option value="" disabled selected>Selecciona un producto</option>
+                            <!-- Los productos se cargarán dinámicamente aquí -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label"><i class="bi bi-cart-plus me-1"></i>Cantidad Vendida <span class="text-danger">*</span></label>
+                        <input type="number" id="quantity" class="form-control" required min="1" placeholder="Número de unidades">
+                    </div>
+                    <div class="mb-3">
+                        <label for="datetime" class="form-label"><i class="bi bi-calendar-event me-1"></i>Fecha y Hora de Venta <span class="text-danger">*</span></label>
+                        <input type="datetime-local" id="datetime" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-save me-2"></i>Registrar Venta</button>
+                </form>
+            </div>
+
+            <!-- Tabla de Ventas Realizadas -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-table me-2"></i>Ventas Realizadas</h3>
+                    <div class="table-responsive">
+                        <table id="salesTable" class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Fecha y Hora</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las ventas se cargarán aquí dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Venta -->
+    <div class="modal fade" id="editSaleModal" tabindex="-1" aria-labelledby="editSaleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSaleModalLabel"><i class="bi bi-pencil-fill me-2"></i>Editar Venta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editSaleForm">
+                        <div class="mb-3">
+                            <label for="editQuantity" class="form-label"><i class="bi bi-cart-check me-1"></i>Nueva Cantidad Vendida <span class="text-danger">*</span></label>
+                            <input type="number" id="editQuantity" class="form-control" min="1" required placeholder="Número de unidades">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editDatetime" class="form-label"><i class="bi bi-calendar-plus me-1"></i>Nueva Fecha y Hora de Venta <span class="text-danger">*</span></label>
+                            <input type="datetime-local" id="editDatetime" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-save me-2"></i>Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Confirmar Eliminación -->
+    <div class="modal fade" id="deleteSaleModal" tabindex="-1" aria-labelledby="deleteSaleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteSaleModalLabel"><i class="bi bi-exclamation-triangle-fill me-2"></i>Eliminar Venta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar esta venta? Esta acción no se puede revertir.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete"><i class="bi bi-trash-fill me-2"></i>Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <!-- Bootstrap Bundle JS (Incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Choices.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <!-- Firebase JS SDK (Modular) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, doc, updateDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // Tu configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyASIRckSRbp2DFJZIIgMMAXg4BsBnntWnc",
+            authDomain: "administrarinventario.firebaseapp.com",
+            projectId: "administrarinventario",
+            storageBucket: "administrarinventario.appspot.com",
+            messagingSenderId: "991218574772",
+            appId: "1:991218574772:web:4ba26113a8e6a19128bee1",
+            measurementId: "G-JWW1WQCVHH"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let products = [];
+        let currentSaleId = null;
+        let choicesInstance = null; // Instancia de Choices.js
+
+        // Cargar productos para el formulario de venta
+        async function loadProducts() {
+            const productSelect = document.getElementById('productSelect');
+            productSelect.innerHTML = '<option value="" disabled selected>Selecciona un producto</option>';
+            products = []; // Resetear la lista de productos
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "productos"));
+                querySnapshot.forEach((docSnap) => {
+                    const product = docSnap.data();
+                    const option = document.createElement("option");
+                    option.value = docSnap.id;
+                    option.textContent = `${product.marca} - ${product.modelo} (Stock: ${product.stock})`;
+                    productSelect.appendChild(option);
+                    products.push({ id: docSnap.id, ...product });
+                });
+
+                // Inicializar Choices.js si aún no lo está
+                if (!choicesInstance) {
+                    choicesInstance = new Choices(productSelect, {
+                        searchEnabled: true,
+                        itemSelectText: '',
+                        placeholder: true,
+                        placeholderValue: 'Selecciona un producto',
+                        shouldSort: false,
+                    });
+                } else {
+                    // Si ya está inicializado, actualizar las opciones
+                    choicesInstance.destroy();
+                    choicesInstance = new Choices(productSelect, {
+                        searchEnabled: true,
+                        itemSelectText: '',
+                        placeholder: true,
+                        placeholderValue: 'Selecciona un producto',
+                        shouldSort: false,
+                    });
+                }
+
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un problema al cargar los productos.', 'error');
+                console.error("Error al cargar productos:", error);
+            }
+        }
+
+        // Cargar las ventas realizadas
+        async function loadSales() {
+            const salesTable = document.getElementById('salesTable').getElementsByTagName('tbody')[0];
+            salesTable.innerHTML = '';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "ventas"));
+                querySnapshot.forEach((docSnap) => {
+                    const sale = docSnap.data();
+                    const row = salesTable.insertRow();
+                    row.innerHTML = `
+                        <td>${sale.producto}</td>
+                        <td>${sale.cantidad}</td>
+                        <td>${formatDateTime(sale.fechaHora)}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm editBtn" data-id="${docSnap.id}" data-cantidad="${sale.cantidad}" data-fechaHora="${sale.fechaHora}"><i class="bi bi-pencil-fill me-1"></i>Editar</button>
+                            <button class="btn btn-danger btn-sm deleteBtn" data-id="${docSnap.id}" data-cantidad="${sale.cantidad}"><i class="bi bi-trash-fill me-1"></i>Eliminar</button>
+                        </td>
+                    `;
+                });
+
+                // Asignar eventos a los botones de Editar y Eliminar
+                document.querySelectorAll('.editBtn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const saleId = e.target.closest('button').dataset.id;
+                        const cantidad = parseInt(e.target.closest('button').dataset.cantidad);
+                        const fechaHora = e.target.closest('button').dataset.fechaHora;
+
+                        currentSaleId = saleId;
+                        document.getElementById('editQuantity').value = cantidad;
+                        document.getElementById('editDatetime').value = convertToInputDateTime(fechaHora);
+
+                        // Mostrar el modal de edición
+                        new bootstrap.Modal(document.getElementById('editSaleModal')).show();
+                    });
+                });
+
+                document.querySelectorAll('.deleteBtn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const saleId = e.target.closest('button').dataset.id;
+                        const cantidad = parseInt(e.target.closest('button').dataset.cantidad);
+
+                        currentSaleId = saleId;
+                        currentSaleQuantity = cantidad;
+
+                        // Mostrar el modal de confirmación de eliminación
+                        new bootstrap.Modal(document.getElementById('deleteSaleModal')).show();
+                    });
+                });
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un problema al cargar las ventas.', 'error');
+                console.error("Error al cargar ventas:", error);
+            }
+        }
+
+        // Formatear la fecha y hora para mostrar en la tabla
+        function formatDateTime(fechaHora) {
+            const date = new Date(fechaHora);
+            return date.toLocaleString();
+        }
+
+        // Convertir la fecha y hora almacenada a formato datetime-local para el input
+        function convertToInputDateTime(fechaHora) {
+            const date = new Date(fechaHora);
+            const tzOffset = date.getTimezoneOffset() * 60000; //offset in milliseconds
+            const localISOTime = (new Date(date - tzOffset)).toISOString().slice(0,16);
+            return localISOTime;
+        }
+
+        // Registrar una venta
+        document.getElementById('salesForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const productId = document.getElementById('productSelect').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const datetime = document.getElementById('datetime').value;
+
+            if (!datetime) {
+                Swal.fire('Error', 'Por favor, selecciona la fecha y hora de la venta.', 'error');
+                return;
+            }
+
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                Swal.fire('Error', 'Producto no válido.', 'error');
+                return;
+            }
+
+            if (quantity > product.stock) {
+                Swal.fire('Error', 'Cantidad vendida excede el stock disponible.', 'error');
+                return;
+            }
+
+            try {
+                // Registrar la venta
+                await addDoc(collection(db, "ventas"), {
+                    productId: productId,
+                    producto: `${product.marca} - ${product.modelo}`,
+                    cantidad: quantity,
+                    fechaHora: new Date(datetime).toISOString()
+                });
+
+                // Actualizar stock
+                const productRef = doc(db, "productos", productId);
+                await updateDoc(productRef, {
+                    stock: product.stock - quantity
+                });
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Venta registrada',
+                    text: 'La venta se ha registrado exitosamente.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
+                // Limpiar el formulario después de guardar
+                document.getElementById('salesForm').reset();
+
+                // Resetear Choices.js para reflejar el stock actualizado
+                loadProducts();
+                loadSales();
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un error al registrar la venta.', 'error');
+                console.error("Error al registrar venta:", error);
+            }
+        });
+
+        // Guardar cambios de edición
+        document.getElementById('editSaleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newQuantity = parseInt(document.getElementById('editQuantity').value);
+            const newDatetime = document.getElementById('editDatetime').value;
+
+            if (isNaN(newQuantity) || newQuantity < 1) {
+                Swal.fire('Error', 'La cantidad debe ser un número mayor o igual a 1.', 'error');
+                return;
+            }
+
+            if (!newDatetime) {
+                Swal.fire('Error', 'Por favor, selecciona la nueva fecha y hora de la venta.', 'error');
+                return;
+            }
+
+            try {
+                const saleRef = doc(db, "ventas", currentSaleId);
+                const saleSnap = await getDoc(saleRef);
+                if (!saleSnap.exists()) {
+                    Swal.fire('Error', 'La venta no existe.', 'error');
+                    return;
+                }
+
+                const saleData = saleSnap.data();
+                const oldQuantity = saleData.cantidad;
+                const quantityDifference = newQuantity - oldQuantity;
+
+                // Verificar si hay suficiente stock para aumentar la venta
+                if (quantityDifference > 0) {
+                    const productRef = doc(db, "productos", saleData.productId);
+                    const productSnap = await getDoc(productRef);
+                    if (productSnap.exists()) {
+                        const productData = productSnap.data();
+                        if (quantityDifference > productData.stock) {
+                            Swal.fire('Error', 'Cantidad vendida excede el stock disponible.', 'error');
+                            return;
+                        }
+                        // Actualizar el stock
+                        await updateDoc(productRef, {
+                            stock: productData.stock - quantityDifference
+                        });
+                    } else {
+                        Swal.fire('Error', 'El producto asociado a esta venta no existe.', 'error');
+                        return;
+                    }
+                } else if (quantityDifference < 0) {
+                    // Si la cantidad disminuye, restaurar el stock
+                    const productRef = doc(db, "productos", saleData.productId);
+                    const productSnap = await getDoc(productRef);
+                    if (productSnap.exists()) {
+                        const productData = productSnap.data();
+                        await updateDoc(productRef, {
+                            stock: productData.stock - quantityDifference // resta de un número negativo suma
+                        });
+                    } else {
+                        Swal.fire('Error', 'El producto asociado a esta venta no existe.', 'error');
+                        return;
+                    }
+                }
+
+                // Actualizar la venta
+                await updateDoc(saleRef, {
+                    cantidad: newQuantity,
+                    fechaHora: new Date(newDatetime).toISOString()
+                });
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Venta actualizada',
+                    text: 'La venta ha sido actualizada exitosamente.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
+                // Recargar productos y ventas
+                loadProducts();
+                loadSales();
+
+                // Cerrar modal
+                bootstrap.Modal.getInstance(document.getElementById('editSaleModal')).hide();
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un error al actualizar la venta.', 'error');
+                console.error("Error al actualizar venta:", error);
+            }
+        });
+
+        // Confirmar eliminación de venta
+        document.getElementById('confirmDelete').addEventListener('click', async () => {
+            try {
+                const saleRef = doc(db, "ventas", currentSaleId);
+                const saleSnap = await getDoc(saleRef);
+                if (!saleSnap.exists()) {
+                    Swal.fire('Error', 'La venta no existe.', 'error');
+                    return;
+                }
+
+                const saleData = saleSnap.data();
+
+                // Restaurar el stock
+                const productRef = doc(db, "productos", saleData.productId);
+                const productSnap = await getDoc(productRef);
+                if (productSnap.exists()) {
+                    const productData = productSnap.data();
+                    await updateDoc(productRef, {
+                        stock: productData.stock + saleData.cantidad
+                    });
+                } else {
+                    Swal.fire('Error', 'El producto asociado a esta venta no existe.', 'error');
+                    return;
+                }
+
+                // Eliminar la venta
+                await deleteDoc(saleRef);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Venta eliminada',
+                    text: 'La venta ha sido eliminada exitosamente.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
+                // Recargar productos y ventas
+                loadProducts();
+                loadSales();
+
+                // Cerrar modal
+                bootstrap.Modal.getInstance(document.getElementById('deleteSaleModal')).hide();
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un error al eliminar la venta.', 'error');
+                console.error("Error al eliminar venta:", error);
+            }
+        });
+
+        // Cargar productos y ventas al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            loadSales();
+        });
+    </script>
+
+</body>
+</html>
