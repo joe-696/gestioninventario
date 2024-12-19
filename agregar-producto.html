@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Choices.js CSS (opcional para selects mejorados) -->
+    <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+        /* Barra lateral */
+        .sidebar {
+            background-color: #1f2d3d;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 30px 20px;
+            width: 220px;
+            transition: all 0.3s;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar h3 {
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-align: center;
+            color: #3498db;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #3498db;
+            transform: translateX(5px);
+        }
+        .sidebar a .bi {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        /* Contenido principal */
+        .content {
+            margin-left: 220px;
+            padding: 30px 20px;
+            transition: all 0.3s;
+        }
+        /* Estilos del formulario */
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s;
+        }
+        .form-container:hover {
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        /* Media Queries para Responsividad */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 180px;
+            }
+            .content {
+                margin-left: 180px;
+            }
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+                padding: 20px 10px;
+            }
+            /* Mostrar Navbar en dispositivos móviles */
+            .navbar-mobile {
+                display: flex;
+            }
+            /* Mejorar el modal en móviles */
+            .modal-dialog {
+                max-width: 90%;
+                margin: 1.75rem auto;
+            }
+        }
+        @media (min-width: 769px) {
+            .navbar-mobile {
+                display: none;
+            }
+        }
+        /* Spinner para carga */
+        .spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegación para Dispositivos Móviles -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-md-none navbar-mobile">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-shop-window me-2"></i>Zapatillas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile" 
+                    aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavMobile">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-box-seam me-1"></i>Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="agregar-producto.html"><i class="bi bi-plus-circle me-1"></i>Agregar Producto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ventas.html"><i class="bi bi-cash-coin me-1"></i>Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reportes.html"><i class="bi bi-bar-chart-fill me-1"></i>Reportes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Barra Lateral para Dispositivos Grandes -->
+    <div class="sidebar d-none d-md-block">
+        <h3><i class="bi bi-shop-window me-2"></i>Zapatillas</h3>
+        <a href="index.html"><i class="bi bi-box-seam me-2"></i>Inventario</a>
+        <a href="agregar-producto.html" class="active"><i class="bi bi-plus-circle me-2"></i>Agregar Producto</a>
+        <a href="ventas.html"><i class="bi bi-cash-coin me-2"></i>Ventas</a>
+        <a href="reportes.html"><i class="bi bi-bar-chart-fill me-2"></i>Reportes</a>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="content">
+        <div class="container-fluid">
+            <h2 class="my-4 text-primary"><i class="bi bi-plus-circle me-2"></i>Agregar Nuevo Producto</h2>
+            <div class="form-container">
+                <form id="productForm">
+                    <div class="mb-3">
+                        <label for="brandInput" class="form-label"><i class="bi bi-tag me-2"></i>Marca <span class="text-danger">*</span></label>
+                        <select id="brandInput" class="form-select" required>
+                            <option value="">Seleccionar Marca</option>
+                            <option value="Adidas">Adidas</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Puma">Puma</option>
+                            <option value="Joma">Joma</option>
+                            <option value="Munich">Munich</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modelInput" class="form-label"><i class="bi bi-list-ol me-2"></i>Modelo <span class="text-danger">*</span></label>
+                        <input type="text" id="modelInput" class="form-control" required placeholder="Ej. Air Max 2024">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="priceInput" class="form-label"><i class="bi bi-cash me-2"></i>Precio de Venta ($) <span class="text-danger">*</span></label>
+                            <input type="number" id="priceInput" class="form-control" required min="0" step="0.01" placeholder="Ej. 99.99">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="stockInput" class="form-label"><i class="bi bi-box-seam me-2"></i>Cantidad en Stock <span class="text-danger">*</span></label>
+                            <input type="number" id="stockInput" class="form-control" required min="0" placeholder="Ej. 50">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageInput" class="form-label"><i class="bi bi-image me-2"></i>URL de la Imagen</label>
+                        <input type="url" id="imageInput" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                    </div>
+                    <!-- Sección para Tallas -->
+                    <div class="mb-3">
+                        <label class="form-label"><i class="bi bi-flag me-2"></i>Tallas Disponibles <span class="text-danger">*</span></label>
+                        <div class="d-flex flex-wrap">
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="36" id="size36">
+                                <label class="form-check-label" for="size36">
+                                    36
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="37" id="size37">
+                                <label class="form-check-label" for="size37">
+                                    37
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="38" id="size38">
+                                <label class="form-check-label" for="size38">
+                                    38
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="39" id="size39">
+                                <label class="form-check-label" for="size39">
+                                    39
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="40" id="size40">
+                                <label class="form-check-label" for="size40">
+                                    40
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="41" id="size41">
+                                <label class="form-check-label" for="size41">
+                                    41
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="42" id="size42">
+                                <label class="form-check-label" for="size42">
+                                    42
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="43" id="size43">
+                                <label class="form-check-label" for="size43">
+                                    43
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="44" id="size44">
+                                <label class="form-check-label" for="size44">
+                                    44
+                                </label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="45" id="size45">
+                                <label class="form-check-label" for="size45">
+                                    45
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-save me-2"></i>Guardar Producto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <!-- Bootstrap Bundle JS (Incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Choices.js JS (opcional para selects mejorados) -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <!-- Firebase JS SDK (Modular) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyASIRckSRbp2DFJZIIgMMAXg4BsBnntWnc",
+            authDomain: "administrarinventario.firebaseapp.com",
+            projectId: "administrarinventario",
+            storageBucket: "administrarinventario.appspot.com",
+            messagingSenderId: "991218574772",
+            appId: "1:991218574772:web:4ba26113a8e6a19128bee1",
+            measurementId: "G-JWW1WQCVHH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Inicializar Choices.js para el select de marcas (opcional)
+        document.addEventListener('DOMContentLoaded', () => {
+            const brandSelect = document.getElementById('brandInput');
+            if (brandSelect) {
+                new Choices(brandSelect, {
+                    searchEnabled: false,
+                    itemSelectText: '',
+                });
+            }
+        });
+
+        // Evento para manejar el formulario de producto
+        document.getElementById('productForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Recoger los datos del formulario
+            const brand = document.getElementById('brandInput').value;
+            const model = document.getElementById('modelInput').value.trim();
+            const priceVenta = parseFloat(document.getElementById('priceInput').value);
+            const stock = parseInt(document.getElementById('stockInput').value, 10);
+            const imageUrl = document.getElementById('imageInput').value.trim();
+
+            // Recoger las tallas seleccionadas
+            const sizeCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const sizes = Array.from(sizeCheckboxes).map(checkbox => parseInt(checkbox.value, 10));
+
+            // Verificar que todos los campos sean válidos
+            if (!brand || !model || isNaN(priceVenta) || priceVenta < 0 || isNaN(stock) || stock < 0) {
+                Swal.fire('Error', 'Por favor, completa todos los campos correctamente.', 'error');
+                return;
+            }
+
+            // Verificar que al menos una talla esté seleccionada
+            if (sizes.length === 0) {
+                Swal.fire('Error', 'Por favor, selecciona al menos una talla.', 'error');
+                return;
+            }
+
+            const product = {
+                marca: brand,
+                modelo: model,
+                precioVenta: priceVenta,
+                stock: stock,
+                imageUrl: imageUrl || '',  // La URL de la imagen es opcional
+                tallas: sizes
+            };
+
+            try {
+                // Agregar el producto a la colección de Firestore
+                await addDoc(collection(db, "productos"), product);
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Producto agregado correctamente.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                // Limpiar el formulario después de guardar
+                document.getElementById('productForm').reset();
+                // Reiniciar Choices.js si está utilizado
+                const brandSelect = document.getElementById('brandInput');
+                if (brandSelect && brandSelect.choices) {
+                    brandSelect.choices.reset();
+                }
+            } catch (error) {
+                Swal.fire('Error', 'Hubo un problema al agregar el producto.', 'error');
+                console.error("Error al agregar producto:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>
