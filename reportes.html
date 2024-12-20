@@ -213,7 +213,7 @@
                         <div class="form-text">Mantén presionada la tecla Ctrl (Windows) o Command (Mac) para seleccionar múltiples opciones.</div>
                     </div>
 
-                    <!-- Filtro por fecha -->
+                    <!-- Filtro por fecha específica -->
                     <div class="col-md-4">
                         <label for="dateFilter" class="form-label">Filtrar por Fecha</label>
                         <input type="date" id="dateFilter" class="form-control">
@@ -304,8 +304,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- Firebase JS SDK (Modular) -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getFirestore, collection, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+        // Importar las funciones necesarias desde la SDK de Firebase versión 9
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         // Configuración de Firebase
         const firebaseConfig = {
@@ -330,17 +331,23 @@
         // Spinner de carga
         const spinner = document.getElementById('spinner');
 
-        // Función para mostrar el spinner
+        /**
+         * Muestra el spinner de carga
+         */
         function showSpinner() {
             spinner.style.display = 'flex';
         }
 
-        // Función para ocultar el spinner
+        /**
+         * Oculta el spinner de carga
+         */
         function hideSpinner() {
             spinner.style.display = 'none';
         }
 
-        // Función para cargar productos y llenar el filtro
+        /**
+         * Carga los productos desde Firestore y los inserta en el filtro de productos
+         */
         async function loadProducts() {
             const productFilter = document.getElementById('productFilter');
             productFilter.innerHTML = '<option value="">Todos los productos</option>';
@@ -366,22 +373,14 @@
                         placeholder: true,
                         placeholderValue: 'Todos los productos',
                         shouldSort: false,
-                        maxItemCount: -1,
                         noResultsText: 'No se encontraron productos',
                         itemSelectText: '',
                     });
                 } else {
-                    // Si ya está inicializado, actualizar las opciones
-                    choicesInstance.destroy();
-                    choicesInstance = new Choices(productFilter, {
-                        removeItemButton: true,
-                        searchPlaceholderValue: 'Buscar productos',
-                        placeholder: true,
-                        placeholderValue: 'Todos los productos',
-                        shouldSort: false,
-                        maxItemCount: -1,
-                        noResultsText: 'No se encontraron productos',
-                        itemSelectText: '',
+                    // Actualizar las opciones sin destruir la instancia
+                    choicesInstance.clearStore();
+                    products.forEach(product => {
+                        choicesInstance.setChoiceByValue(product.id);
                     });
                 }
             } catch (error) {
@@ -390,7 +389,9 @@
             }
         }
 
-        // Función para cargar ventas
+        /**
+         * Carga las ventas desde Firestore
+         */
         async function loadSales() {
             salesData = []; // Reiniciar el arreglo para evitar duplicados
 
@@ -398,7 +399,7 @@
                 const salesSnapshot = await getDocs(collection(db, "ventas"));
                 salesSnapshot.forEach((docSnap) => {
                     const sale = docSnap.data();
-                    // Convertir Timestamp a Date
+                    // Convertir Timestamp a Date si es necesario
                     const fechaHora = sale.fechaHora instanceof Timestamp ? sale.fechaHora.toDate() : new Date(sale.fechaHora);
                     salesData.push({
                         id: docSnap.id,
@@ -416,7 +417,9 @@
             }
         }
 
-        // Función para actualizar el reporte
+        /**
+         * Actualiza las estadísticas y los gráficos según las ventas filtradas
+         */
         function updateReport() {
             // Mostrar indicador de carga
             showSpinner();
@@ -465,7 +468,10 @@
             hideSpinner();
         }
 
-        // Función para cargar el gráfico de ventas por producto
+        /**
+         * Carga el gráfico de ventas por producto utilizando Chart.js
+         * @param {Object} productSales - Objeto con las ventas por producto
+         */
         function loadSalesChart(productSales) {
             const ctx = document.getElementById('salesChart').getContext('2d');
 
@@ -511,7 +517,9 @@
             });
         }
 
-        // Función para cargar el gráfico de ventas por mes
+        /**
+         * Carga el gráfico de ventas por mes utilizando Chart.js
+         */
         function loadMonthlySalesChart() {
             const ctx = document.getElementById('monthlySalesChart').getContext('2d');
 
@@ -578,11 +586,13 @@
             });
         }
 
-        // Función para aplicar filtros
+        /**
+         * Aplica los filtros seleccionados por el usuario
+         */
         function applyFilters() {
             const selectedProducts = choicesInstance.getValue(true); // Obtener los IDs seleccionados
-            const startDate = document.getElementById('dateFilter').value;
-            const endDate = document.getElementById('monthFilter').value; // Asumimos que 'monthFilter' es 'endDate'
+            const specificDate = document.getElementById('dateFilter').value;
+            const selectedMonth = document.getElementById('monthFilter').value;
 
             filteredSales = salesData.filter(sale => {
                 let matches = true;
@@ -593,15 +603,15 @@
                 }
 
                 // Filtrar por fecha específica
-                if (startDate) {
+                if (specificDate) {
                     const saleDate = sale.fechaHora.toISOString().split('T')[0];
-                    matches = matches && (saleDate === startDate);
+                    matches = matches && (saleDate === specificDate);
                 }
 
                 // Filtrar por mes
-                if (endDate) {
+                if (selectedMonth) {
                     const saleMonth = sale.fechaHora.toISOString().substring(0,7); // YYYY-MM
-                    matches = matches && (saleMonth === endDate);
+                    matches = matches && (saleMonth === selectedMonth);
                 }
 
                 return matches;
@@ -610,16 +620,20 @@
             updateReport();
         }
 
-        // Función para limpiar filtros
+        /**
+         * Limpia todos los filtros aplicados
+         */
         function clearFilters() {
-            choicesInstance.setChoiceByValue(''); // Limpiar selección de productos
+            choicesInstance.removeActiveItems(); // Limpiar selección de productos
             document.getElementById('dateFilter').value = "";
             document.getElementById('monthFilter').value = "";
             filteredSales = [...salesData];
             updateReport();
         }
 
-        // Función para exportar a PDF
+        /**
+         * Exporta el reporte a un archivo PDF utilizando jsPDF
+         */
         async function exportPDF() {
             // Mostrar spinner durante la exportación
             showSpinner();
@@ -629,7 +643,7 @@
                 const doc = new jsPDF('p', 'pt', 'a4');
                 let yOffset = 40;
 
-                // Título
+                // Título del reporte
                 doc.setFontSize(22);
                 doc.text("Reporte de Ventas", 40, yOffset);
                 yOffset += 30;
@@ -675,7 +689,9 @@
             }
         }
 
-        // Función para inicializar la página
+        /**
+         * Inicializa la página cargando productos y ventas
+         */
         async function init() {
             showSpinner();
             await loadProducts();
