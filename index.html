@@ -252,10 +252,10 @@
                     <div class="col-md-4 mb-3">
                         <div class="filter-buttons">
                             <button class="btn btn-outline-primary active" data-brand="Todos"><i class="bi bi-clipboard2-check me-1"></i>Todos</button>
-                            <button class="btn btn-outline-primary" data-brand="Nike"><i class="fas fa-shoe-prints me-1"></i>Nike</button>
-                            <button class="btn btn-outline-primary" data-brand="Adidas"><i class="fas fa-shoe-prints me-1"></i>Adidas</button>
-                            <button class="btn btn-outline-primary" data-brand="Puma"><i class="fas fa-shoe-prints me-1"></i>Puma</button>
-                            <button class="btn btn-outline-primary" data-brand="EOS"><i class="fas fa-shoe-prints me-1"></i>EOS</button>
+                            <button class="btn btn-outline-primary" data-brand="Nike"><i class="bi bi-sunglasses me-1"></i>Nike</button>
+                            <button class="btn btn-outline-primary" data-brand="Adidas"><i class="bi bi-signpost-split me-1"></i>Adidas</button>
+                            <button class="btn btn-outline-primary" data-brand="Puma"><i class="bi bi-star-fill me-1"></i>Puma</button>
+                            <button class="btn btn-outline-primary" data-brand="EOS"><i class="bi bi-circle-fill me-1"></i>EOS</button>
                         </div>
                     </div>
                     <!-- Botón para Descargar PDF -->
@@ -301,85 +301,85 @@
                                 <input type="text" class="form-control" id="editModelo" required placeholder="Ej. Air Max">
                             </div>
                         </div>
+                        <!-- Sección para Tallas y Cantidades -->
                         <div class="mb-3">
-                            <label class="form-label">Tallas Disponibles <span class="text-danger">*</span></label>
+                            <label class="form-label">Tallas Disponibles y Cantidades <span class="text-danger">*</span></label>
                             <div class="d-flex flex-wrap">
-                                <div class="form-check me-3">
+                                <!-- Repetir para cada talla -->
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="36" id="editSize36">
-                                    <label class="form-check-label" for="editSize36">
+                                    <label class="form-check-label me-2" for="editSize36">
                                         36
                                     </label>
+                                    <input type="number" id="editSize36Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="37" id="editSize37">
-                                    <label class="form-check-label" for="editSize37">
+                                    <label class="form-check-label me-2" for="editSize37">
                                         37
                                     </label>
+                                    <input type="number" id="editSize37Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="38" id="editSize38">
-                                    <label class="form-check-label" for="editSize38">
+                                    <label class="form-check-label me-2" for="editSize38">
                                         38
                                     </label>
+                                    <input type="number" id="editSize38Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <!-- Agrega las demás tallas de la misma manera -->
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="39" id="editSize39">
-                                    <label class="form-check-label" for="editSize39">
+                                    <label class="form-check-label me-2" for="editSize39">
                                         39
                                     </label>
+                                    <input type="number" id="editSize39Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="40" id="editSize40">
-                                    <label class="form-check-label" for="editSize40">
+                                    <label class="form-check-label me-2" for="editSize40">
                                         40
                                     </label>
+                                    <input type="number" id="editSize40Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="41" id="editSize41">
-                                    <label class="form-check-label" for="editSize41">
+                                    <label class="form-check-label me-2" for="editSize41">
                                         41
                                     </label>
+                                    <input type="number" id="editSize41Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="42" id="editSize42">
-                                    <label class="form-check-label" for="editSize42">
+                                    <label class="form-check-label me-2" for="editSize42">
                                         42
                                     </label>
+                                    <input type="number" id="editSize42Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="43" id="editSize43">
-                                    <label class="form-check-label" for="editSize43">
+                                    <label class="form-check-label me-2" for="editSize43">
                                         43
                                     </label>
+                                    <input type="number" id="editSize43Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="44" id="editSize44">
-                                    <label class="form-check-label" for="editSize44">
+                                    <label class="form-check-label me-2" for="editSize44">
                                         44
                                     </label>
+                                    <input type="number" id="editSize44Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
-                                <div class="form-check me-3">
+                                <div class="form-check me-3 mb-2 d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="45" id="editSize45">
-                                    <label class="form-check-label" for="editSize45">
+                                    <label class="form-check-label me-2" for="editSize45">
                                         45
                                     </label>
+                                    <input type="number" id="editSize45Qty" class="form-control size-quantity" placeholder="Cantidad" min="0" disabled>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="editPrecio" class="form-label">Precio de Venta ($) <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="editPrecio" required min="0" step="0.01" placeholder="Ej. 99.99">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="editStock" class="form-label">Cantidad en Stock <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="editStock" required min="0" placeholder="Ej. 50">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editImageUrl" class="form-label">URL de la Imagen</label>
-                            <input type="url" class="form-control" id="editImageUrl" placeholder="https://ejemplo.com/imagen.jpg">
-                        </div>
+                        <!-- Fin Sección de Tallas y Cantidades -->
                         <button type="submit" class="btn btn-primary w-100"><i class="bi bi-save me-2"></i>Guardar Cambios</button>
                     </form>
                 </div>
@@ -393,7 +393,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Choices.js JS -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-    <!-- jsPDF and html2canvas for PDF generation -->
+    <!-- jsPDF y html2canvas para generación de PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- Firebase JS SDK (Modular) -->
@@ -470,7 +470,13 @@
             let filteredProducts = allProducts.filter(product => {
                 // Filtro por búsqueda
                 const searchMatch = Object.values(product).some(value =>
-                    value.toString().toLowerCase().includes(currentSearchQuery.toLowerCase())
+                    // Si 'tallas' es un objeto, combinamos las claves y valores para búsqueda
+                    (typeof value === 'object' && value !== null) ? 
+                        Object.entries(value).some(([k, v]) => 
+                            `${k} ${v}`.toLowerCase().includes(currentSearchQuery.toLowerCase())
+                        )
+                        : 
+                        value.toString().toLowerCase().includes(currentSearchQuery.toLowerCase())
                 );
 
                 // Filtro por marca
@@ -481,10 +487,12 @@
 
             // Ordenar los productos: stock <=5 primero
             filteredProducts.sort((a, b) => {
-                if ((a.stock || 0) <= 5 && (b.stock || 0) > 5) {
+                const stockA = a.stockTotal || 0;
+                const stockB = b.stockTotal || 0;
+                if (stockA <= 5 && stockB > 5) {
                     return -1;
                 }
-                if ((a.stock || 0) > 5 && (b.stock || 0) <= 5) {
+                if (stockA > 5 && stockB <= 5) {
                     return 1;
                 }
                 return 0;
@@ -492,17 +500,18 @@
 
             // Renderizar cada producto
             filteredProducts.forEach((product) => {
-                const isLowStock = product.stock !== undefined && product.stock <= 5;
-                const sizes = Array.isArray(product.tallas) ? product.tallas.join(', ') : product.talla;
+                const isLowStock = product.stockTotal !== undefined && product.stockTotal <= 5;
+                // Formatear las tallas y sus cantidades
+                const tallasFormatted = product.tallas ? Object.entries(product.tallas).map(([size, qty]) => `${size}: ${qty}`).join(', ') : 'N/A';
                 const card = `
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="card product-card ${isLowStock ? 'low-stock' : ''} h-100">
                             <img src="${product.imageUrl || 'https://via.placeholder.com/250'}" alt="${product.modelo}" loading="lazy" crossorigin="anonymous">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${product.marca} - ${product.modelo}</h5>
-                                <p class="card-text"><strong>Tallas:</strong> ${sizes}</p>
+                                <p class="card-text"><strong>Tallas y Cantidades:</strong> ${tallasFormatted}</p>
                                 <p class="card-text"><strong>Precio:</strong> $${product.precioVenta.toFixed(2)}</p>
-                                <p class="card-text"><strong>Stock:</strong> ${product.stock !== undefined ? product.stock : 'N/A'}</p>
+                                <p class="card-text"><strong>Stock Total:</strong> ${product.stockTotal !== undefined ? product.stockTotal : 'N/A'}</p>
                                 <div class="mt-auto d-flex justify-content-between">
                                     <button class="btn btn-warning btn-sm" onclick="editProduct('${product.id}')">
                                         <i class="bi bi-pencil-fill me-1"></i> Editar
@@ -576,32 +585,37 @@
                     // Rellenar el formulario con los datos actuales
                     document.getElementById('editMarca').value = product.marca || '';
                     document.getElementById('editModelo').value = product.modelo || '';
-                    
-                    // Rellenar las tallas
-                    const sizes = Array.isArray(product.tallas) ? product.tallas : [product.talla];
-                    // Primero, desmarcar todas las tallas
-                    const sizeCheckboxes = [
-                        'editSize36', 'editSize37', 'editSize38', 'editSize39', 
-                        'editSize40', 'editSize41', 'editSize42', 'editSize43', 
-                        'editSize44', 'editSize45'
-                    ];
-                    sizeCheckboxes.forEach(id => {
-                        const checkbox = document.getElementById(id);
-                        if (checkbox) {
-                            checkbox.checked = false;
-                        }
-                    });
-                    // Marcar las tallas que tiene el producto
-                    sizes.forEach(size => {
-                        const checkbox = document.getElementById(`editSize${size}`);
-                        if (checkbox) {
-                            checkbox.checked = true;
-                        }
-                    });
-
                     document.getElementById('editPrecio').value = product.precioVenta !== undefined ? product.precioVenta : '';
-                    document.getElementById('editStock').value = product.stock !== undefined ? product.stock : '';
                     document.getElementById('editImageUrl').value = product.imageUrl || '';
+
+                    // Rellenar las tallas y cantidades
+                    const tallas = product.tallas || {};
+                    const sizeCheckboxes = [
+                        { id: 'editSize36', qtyId: 'editSize36Qty' },
+                        { id: 'editSize37', qtyId: 'editSize37Qty' },
+                        { id: 'editSize38', qtyId: 'editSize38Qty' },
+                        { id: 'editSize39', qtyId: 'editSize39Qty' },
+                        { id: 'editSize40', qtyId: 'editSize40Qty' },
+                        { id: 'editSize41', qtyId: 'editSize41Qty' },
+                        { id: 'editSize42', qtyId: 'editSize42Qty' },
+                        { id: 'editSize43', qtyId: 'editSize43Qty' },
+                        { id: 'editSize44', qtyId: 'editSize44Qty' },
+                        { id: 'editSize45', qtyId: 'editSize45Qty' },
+                    ];
+
+                    sizeCheckboxes.forEach(size => {
+                        const checkbox = document.getElementById(size.id);
+                        const qtyInput = document.getElementById(size.qtyId);
+                        if (tallas[size.id.replace('editSize', '')]) {
+                            checkbox.checked = true;
+                            qtyInput.value = tallas[size.id.replace('editSize', '')];
+                            qtyInput.disabled = false;
+                        } else {
+                            checkbox.checked = false;
+                            qtyInput.value = '';
+                            qtyInput.disabled = true;
+                        }
+                    });
 
                     // Mostrar el modal
                     const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
@@ -631,25 +645,39 @@
         document.getElementById('editProductForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Recoger las tallas seleccionadas
-            const sizeCheckboxes = document.querySelectorAll('#editProductForm input[type="checkbox"]:checked');
-            const sizes = Array.from(sizeCheckboxes).map(checkbox => parseInt(checkbox.value, 10));
+            // Recoger las tallas seleccionadas y sus cantidades
+            const sizeCheckboxes = document.querySelectorAll('#editProductForm input[type="checkbox"]');
+            const tallas = {};
+
+            sizeCheckboxes.forEach(checkbox => {
+                const size = checkbox.value;
+                const qtyInput = document.getElementById(`${checkbox.id}Qty`);
+                if (checkbox.checked) {
+                    const cantidad = parseInt(qtyInput.value, 10);
+                    if (!isNaN(cantidad) && cantidad > 0) {
+                        tallas[size] = cantidad;
+                    }
+                }
+            });
+
+            // Calcular el stock total como la suma de las cantidades de cada talla
+            const stockTotal = Object.values(tallas).reduce((acc, curr) => acc + curr, 0);
 
             const updatedProduct = {
                 marca: document.getElementById('editMarca').value.trim(),
                 modelo: document.getElementById('editModelo').value.trim(),
-                tallas: sizes, // Actualizar con array de tallas
+                tallas: tallas, // Actualizar con objeto de tallas y cantidades
                 precioVenta: parseFloat(document.getElementById('editPrecio').value),
-                stock: parseInt(document.getElementById('editStock').value, 10),
+                stockTotal: stockTotal,
                 imageUrl: document.getElementById('editImageUrl').value.trim() || '' // Manejar URL de imagen
             };
 
             // Validaciones básicas
-            if (!updatedProduct.marca || !updatedProduct.modelo || sizes.length === 0 || isNaN(updatedProduct.precioVenta) || isNaN(updatedProduct.stock)) {
+            if (!updatedProduct.marca || !updatedProduct.modelo || Object.keys(updatedProduct.tallas).length === 0 || isNaN(updatedProduct.precioVenta)) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Advertencia',
-                    text: 'Por favor, completa todos los campos correctamente y selecciona al menos una talla.',
+                    text: 'Por favor, completa todos los campos correctamente y selecciona al menos una talla con su cantidad.',
                 });
                 return;
             }
@@ -676,6 +704,20 @@
                 console.error("Error al actualizar producto:", error);
             }
         });
+
+        // Función para manejar los cambios en los checkboxes de tallas en el modal
+        function setupCheckboxHandlers() {
+            const sizeCheckboxes = document.querySelectorAll('#editProductForm input[type="checkbox"]');
+            sizeCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const qtyInput = document.getElementById(`${this.id}Qty`);
+                    qtyInput.disabled = !this.checked;
+                    if (!this.checked) {
+                        qtyInput.value = '';
+                    }
+                });
+            });
+        }
 
         // Función para manejar la búsqueda
         function handleSearch(event) {
@@ -758,6 +800,9 @@
 
             // Evento para el botón de descarga PDF
             document.getElementById('downloadPdfBtn').addEventListener('click', downloadInventoryAsPDF);
+
+            // Configurar manejadores de checkboxes en el modal de edición
+            setupCheckboxHandlers();
         }
 
         // Inicializar la aplicación
