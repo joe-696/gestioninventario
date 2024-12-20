@@ -125,6 +125,11 @@
             align-items: center;
             height: 100px;
         }
+        /* Estilos para las cantidades de tallas */
+        .size-quantity {
+            width: 80px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -187,82 +192,96 @@
                         <input type="text" id="modelInput" class="form-control" required placeholder="Ej. Air Max 2024">
                     </div>
                     <div class="row">
+                        <!-- Campo de Precio de Venta -->
                         <div class="col-md-6 mb-3">
                             <label for="priceInput" class="form-label"><i class="bi bi-cash me-2"></i>Precio de Venta ($) <span class="text-danger">*</span></label>
                             <input type="number" id="priceInput" class="form-control" required min="0" step="0.01" placeholder="Ej. 99.99">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <!-- Campo Eliminado: Cantidad en Stock General -->
+                        <!-- <div class="col-md-6 mb-3">
                             <label for="stockInput" class="form-label"><i class="bi bi-box-seam me-2"></i>Cantidad en Stock <span class="text-danger">*</span></label>
                             <input type="number" id="stockInput" class="form-control" required min="0" placeholder="Ej. 50">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="mb-3">
                         <label for="imageInput" class="form-label"><i class="bi bi-image me-2"></i>URL de la Imagen</label>
                         <input type="url" id="imageInput" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
                     </div>
-                    <!-- Sección para Tallas -->
+                    <!-- Sección para Tallas con Cantidades -->
                     <div class="mb-3">
-                        <label class="form-label"><i class="bi bi-flag me-2"></i>Tallas Disponibles <span class="text-danger">*</span></label>
+                        <label class="form-label"><i class="bi bi-flag me-2"></i>Tallas Disponibles y Cantidades <span class="text-danger">*</span></label>
                         <div class="d-flex flex-wrap">
-                            <div class="form-check me-3">
+                            <!-- Repetir para cada talla -->
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="36" id="size36">
                                 <label class="form-check-label" for="size36">
                                     36
                                 </label>
+                                <!-- Campo para ingresar cantidad de cada talla -->
+                                <input type="number" id="size36Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="37" id="size37">
                                 <label class="form-check-label" for="size37">
                                     37
                                 </label>
+                                <input type="number" id="size37Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="38" id="size38">
                                 <label class="form-check-label" for="size38">
                                     38
                                 </label>
+                                <input type="number" id="size38Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="39" id="size39">
                                 <label class="form-check-label" for="size39">
                                     39
                                 </label>
+                                <input type="number" id="size39Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="40" id="size40">
                                 <label class="form-check-label" for="size40">
                                     40
                                 </label>
+                                <input type="number" id="size40Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="41" id="size41">
                                 <label class="form-check-label" for="size41">
                                     41
                                 </label>
+                                <input type="number" id="size41Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="42" id="size42">
                                 <label class="form-check-label" for="size42">
                                     42
                                 </label>
+                                <input type="number" id="size42Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="43" id="size43">
                                 <label class="form-check-label" for="size43">
                                     43
                                 </label>
+                                <input type="number" id="size43Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="44" id="size44">
                                 <label class="form-check-label" for="size44">
                                     44
                                 </label>
+                                <input type="number" id="size44Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
-                            <div class="form-check me-3">
+                            <div class="form-check me-3 mb-2">
                                 <input class="form-check-input" type="checkbox" value="45" id="size45">
                                 <label class="form-check-label" for="size45">
                                     45
                                 </label>
+                                <input type="number" id="size45Qty" class="form-control size-quantity" placeholder="Cantidad" min="0">
                             </div>
                         </div>
                     </div>
@@ -315,32 +334,65 @@
             const brand = document.getElementById('brandInput').value;
             const model = document.getElementById('modelInput').value.trim();
             const priceVenta = parseFloat(document.getElementById('priceInput').value);
-            const stock = parseInt(document.getElementById('stockInput').value, 10);
             const imageUrl = document.getElementById('imageInput').value.trim();
 
-            // Recoger las tallas seleccionadas
-            const sizeCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            const sizes = Array.from(sizeCheckboxes).map(checkbox => parseInt(checkbox.value, 10));
+            // Recoger las tallas seleccionadas y sus cantidades
+            const sizes = {};
+            const sizeElements = [
+                { size: 36, qtyId: 'size36Qty' },
+                { size: 37, qtyId: 'size37Qty' },
+                { size: 38, qtyId: 'size38Qty' },
+                { size: 39, qtyId: 'size39Qty' },
+                { size: 40, qtyId: 'size40Qty' },
+                { size: 41, qtyId: 'size41Qty' },
+                { size: 42, qtyId: 'size42Qty' },
+                { size: 43, qtyId: 'size43Qty' },
+                { size: 44, qtyId: 'size44Qty' },
+                { size: 45, qtyId: 'size45Qty' },
+            ];
+
+            sizeElements.forEach(element => {
+                const checkbox = document.getElementById(`size${element.size}`);
+                const qtyInput = document.getElementById(element.qtyId);
+                if (checkbox.checked) {
+                    const quantity = parseInt(qtyInput.value, 10);
+                    if (!isNaN(quantity) && quantity > 0) {
+                        sizes[element.size] = quantity;
+                    }
+                }
+            });
+
+            // Calcular el stock total como la suma de las cantidades de cada talla
+            const totalStock = Object.values(sizes).reduce((acc, curr) => acc + curr, 0);
 
             // Verificar que todos los campos sean válidos
-            if (!brand || !model || isNaN(priceVenta) || priceVenta < 0 || isNaN(stock) || stock < 0) {
+            if (!brand || !model || isNaN(priceVenta) || priceVenta < 0) {
                 Swal.fire('Error', 'Por favor, completa todos los campos correctamente.', 'error');
                 return;
             }
 
-            // Verificar que al menos una talla esté seleccionada
-            if (sizes.length === 0) {
-                Swal.fire('Error', 'Por favor, selecciona al menos una talla.', 'error');
+            // Verificar que al menos una talla esté seleccionada con una cantidad válida
+            if (Object.keys(sizes).length === 0) {
+                Swal.fire('Error', 'Por favor, selecciona al menos una talla y especifica su cantidad.', 'error');
                 return;
+            }
+
+            // Validar la URL de la imagen si se proporciona
+            if (imageUrl) {
+                const imageUrlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+                if (!imageUrlPattern.test(imageUrl)) {
+                    Swal.fire('Error', 'Por favor, proporciona una URL de imagen válida.', 'error');
+                    return;
+                }
             }
 
             const product = {
                 marca: brand,
                 modelo: model,
                 precioVenta: priceVenta,
-                stock: stock,
+                stockTotal: totalStock, // Stock total calculado
                 imageUrl: imageUrl || '',  // La URL de la imagen es opcional
-                tallas: sizes
+                tallas: sizes // Objeto con tallas y sus cantidades
             };
 
             try {
